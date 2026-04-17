@@ -7,14 +7,14 @@ mayor por el menor y si el número restante es divisible por 3.
 
 import java.util.Scanner;
 
-public class ej1 {
+public class principal_1 {
     public static void main(String[] args) {
         int cant = 3;
         int num[] = new int [cant];
+        Scanner lector = new Scanner (System.in);
 
         for(int i=0; i < cant; i++){
-            Scanner lector = new Scanner (System.in);
-            System.out.println("valor ingresado: ", num); // sout para escribir mas rapido
+            System.out.println("valor ingresado: "); // sout para escribir mas rapido
         }
 
     }
