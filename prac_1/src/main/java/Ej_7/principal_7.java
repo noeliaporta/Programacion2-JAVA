@@ -37,5 +37,6 @@ public class principal_7 {
         }else {
             System.out.println("Que mal, el numero era: " + numRandom );
         }
+        sc.close();
     }
 }
