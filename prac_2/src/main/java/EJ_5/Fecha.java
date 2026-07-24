@@ -23,6 +23,8 @@ public class Fecha {
     private static final String[] MESES = {"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 
+    private static final int[] DIAS_POR_MES = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     public Fecha(int mes, int dia, int anio) {
         setAnio(anio);
         setMes(mes);
@@ -42,23 +44,29 @@ public class Fecha {
     }
 
     private int convertirMesAEntero(String nombreMes) {
-        for (int i = 1; i < MESES.length; i++) {
-            if (MESES[i].equalsIgnoreCase(nombreMes)) {
-                return i;
+        if (nombreMes != null) {
+            for (int i = 1; i < MESES.length; i++) {
+                if (MESES[i].equalsIgnoreCase(nombreMes.trim())) {
+                    return i;
+                }
             }
         }
-        return 1;
+        return 1; //caso de nombre invalido
     }
+
 
     public int getAnio() {
         return anio;
     }
 
     public void setAnio(int anio) {
-        if(anio > 1990 && anio < 2026){
+        if(anio >= 1990 && anio <= 2026){
             this.anio = anio;
+        }else {
+            this.anio = 2000; //si es invalido
         }
     }
+
 
     public int getMes() {
         return mes;
@@ -67,24 +75,38 @@ public class Fecha {
     public void setMes(int mes) {
         if(mes <= 12 && mes >= 1){
             this.mes = mes;
+        }else {
+            this.mes = 1;
         }
-    }
-
-    public int getDia() {
-        return dia;
     }
 
     public void setDia(int dia) {
-        if(dia <= 31 && dia >= 1){
+        int maxDias = obtenerDiasDelMes(this.mes, this.anio);
+        if (dia >= 1 && dia <= maxDias) {
             this.dia = dia;
+        } else {
+            this.dia = 1;
         }
+    }
+
+    private int obtenerDiasDelMes(int mes, int anio) {
+        if (mes < 1 || mes > 12) return 31;
+        // febrero bisiesto
+        if (mes == 2 && esBisiesto(anio)) {
+            return 29;
+        }
+        return DIAS_POR_MES[mes];
+    }
+
+    private boolean esBisiesto(int anio) {
+        return (anio % 400 == 0) || (anio % 4 == 0 && anio % 100 != 0);
     }
 
     public String getNombreMes() {
         if (this.mes >= 1 && this.mes <= 12) {
             return MESES[this.mes];
         }
-        return "Mes inválido";
+        return "Enero";
     }
 
     public void mostrarFecha() {
@@ -92,8 +114,7 @@ public class Fecha {
         System.out.printf("%02d/%02d/%d%n", this.mes, this.dia, this.anio);
         // Junio 14, 2012
         System.out.printf("%s %d, %d%n", getNombreMes(), this.dia, this.anio);
-        // 2011 Agosto 20
-        System.out.printf("%d %s %d%n", this.anio, getNombreMes(), this.dia);
+        // 20 Agosto 11
+        System.out.printf("%d %s %02d%n%n", this.dia, getNombreMes(), this.anio % 100);
     }
 }
-
