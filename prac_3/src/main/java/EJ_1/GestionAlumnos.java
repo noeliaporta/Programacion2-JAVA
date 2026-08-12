@@ -1,11 +1,8 @@
-
-//  CORREGIR //
-
 /*
 Usando ArayList escriba un programa que permita hacer altas, bajas, búsqueda y recorridos
-en una lista de enteros
-en una lista de objetos Alumno (cree la clase)
- */
+a- en una lista de enteros
+b- en una lista de objetos Alumno (cree la clase)
+*/
 
 package EJ_1;
 
@@ -13,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionAlumnos {
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -24,19 +20,18 @@ public class GestionAlumnos {
         int opcionPrincipal;
 
         do {
-            System.out.println("\n=================================");
-            System.out.println("          MENÚ PRINCIPAL - TP 3");
+            System.out.println("          MENÚ                     ");
             System.out.println("=================================");
-            System.out.println("1. Trabajar con Lista de Enteros");
-            System.out.println("2. Trabajar con Lista de Alumnos");
-            System.out.println("3. Salir");
+            System.out.println("1 Trabajar con Lista de Enteros");
+            System.out.println("2 Trabajar con Lista de Alumnos");
+            System.out.println("3 Salir");
             System.out.print("Elija una opción: ");
             opcionPrincipal = scanner.nextInt();
 
             switch (opcionPrincipal) {
                 case 1 -> menuEnteros(scanner, listaEnteros);
                 case 2 -> menuAlumnos(scanner, listaAlumnos);
-                case 3 -> System.out.println("¡Hasta luego!");
+                case 3 -> System.out.println("Hasta luego!");
                 default -> System.out.println("Opción inválida.");
             }
 
@@ -45,24 +40,23 @@ public class GestionAlumnos {
         scanner.close();
     }
 
-    // ==========================================
-    // SUBMENÚ: LISTA DE ENTEROS
-    // ==========================================
+
+    // SUBMENu: LISTA DE ENTEROS
     private static void menuEnteros(Scanner scanner, ArrayList<Integer> lista) {
         int opcion;
         do {
             System.out.println("\n--- GESTIÓN DE ENTEROS ---");
-            System.out.println("1. Alta (Agregar número)");
-            System.out.println("2. Baja (Eliminar número)");
-            System.out.println("3. Buscar número");
+            System.out.println("1. Alta (Agregar num)");
+            System.out.println("2. Baja (Eliminar num)");
+            System.out.println("3. Buscar num");
             System.out.println("4. Recorrer (Mostrar todos)");
             System.out.println("5. Volver al Menú Principal");
-            System.out.print("Opción: ");
+            System.out.print("Opcion: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1 -> {
-                    System.out.print("Ingrese número a agregar: ");
+                    System.out.print("Ingrese num a agregar: ");
                     int num = scanner.nextInt();
                     lista.add(num);
                     System.out.println("Número agregado.");
@@ -98,9 +92,7 @@ public class GestionAlumnos {
         } while (opcion != 5);
     }
 
-    // ==========================================
-    // SUBMENÚ: LISTA DE ALUMNOS
-    // ==========================================
+    // SUBMENU: LISTA DE ALUMNOS
     private static void menuAlumnos(Scanner scanner, ArrayList<Alumno> lista) {
         int opcion;
         do {
@@ -168,6 +160,7 @@ public class GestionAlumnos {
     }
 
     // Método auxiliar para buscar la posición de un alumno por legajo
+
     private static int buscarPorLegajo(ArrayList<Alumno> lista, int legajo) {
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).getLegajo() == legajo) {
